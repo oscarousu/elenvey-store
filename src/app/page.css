@@ -1,0 +1,702 @@
+/* =========================================
+   ELENVEY - ESTILOS DE LA PÁGINA DE INICIO
+   Warm Minimalism, animaciones y transiciones
+   ========================================= */
+
+.home-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================
+   1. HERO SECTION
+   ========================================= */
+.hero-section {
+  position: relative;
+  padding: 4.5rem 0 5.5rem;
+  background: linear-gradient(180deg, #FCFCFC 0%, #F8F7F4 100%);
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1.15fr 0.95fr;
+    gap: 4.5rem;
+  }
+}
+
+.hero-editorial {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  max-width: 640px;
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 3.75rem;
+  }
+}
+
+.title-italic {
+  font-style: italic;
+  color: var(--accent-color);
+  font-weight: 300;
+}
+
+.hero-description {
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 540px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.hero-trust-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.trust-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-sage);
+}
+
+/* Hero Visual & Showcase Cards */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-main-card {
+  position: relative;
+  width: 100%;
+  max-width: 490px;
+}
+
+.hero-image-wrap {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-secondary);
+  aspect-ratio: 4 / 5;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-smooth);
+}
+
+.hero-main-card:hover .hero-img {
+  transform: scale(1.035);
+}
+
+/* Floating Badges */
+.floating-badge-card {
+  position: absolute;
+  bottom: -20px;
+  left: -18px;
+  background-color: rgba(252, 252, 252, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.07);
+  animation: floatGentle 5s ease-in-out infinite;
+  z-index: 5;
+}
+
+.floating-badge-icon {
+  font-size: 1.35rem;
+  background-color: rgba(140, 118, 97, 0.1);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+.floating-badge-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.floating-badge-detail {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.floating-detail-card {
+  position: absolute;
+  top: 35px;
+  right: -22px;
+  background-color: rgba(252, 252, 252, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.07);
+  animation: floatGentle 6s ease-in-out infinite 1.2s;
+  z-index: 5;
+}
+
+.mini-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+}
+
+.mini-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mini-tag {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-terracotta);
+  font-weight: 600;
+}
+
+.mini-title {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+@media (max-width: 640px) {
+  .floating-badge-card {
+    left: 8px;
+    bottom: 8px;
+  }
+  .floating-detail-card {
+    display: none;
+  }
+}
+
+/* =========================================
+   2. PILARES DE MARCA (MANIFIESTO)
+   ========================================= */
+.pillars-section {
+  background-color: var(--bg-secondary);
+  padding: 5.5rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pillars-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3.5rem;
+}
+
+.pillars-main-title {
+  font-size: 2.35rem;
+  margin-top: 0.75rem;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.8rem;
+}
+
+@media (min-width: 640px) {
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .pillars-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pillar-card {
+  background-color: #FCFCFC;
+  padding: 2.2rem 1.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(140, 118, 97, 0.3);
+  box-shadow: var(--shadow-card);
+}
+
+.pillar-num {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--accent-color);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+}
+
+.pillar-title {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+}
+
+.pillar-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* =========================================
+   3. SECCIÓN DE PRODUCTOS DESTACADOS
+   ========================================= */
+.featured-section {
+  padding: 6.5rem 0;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 3.5rem;
+}
+
+.section-title {
+  font-size: 2.75rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.category-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 2.2rem;
+}
+
+.category-pill {
+  padding: 0.52rem 1.25rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.category-pill:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.category-pill.active {
+  background-color: var(--text-primary);
+  color: #FCFCFC;
+  border-color: var(--text-primary);
+  box-shadow: 0 4px 14px rgba(42, 42, 42, 0.12);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem 1.8rem;
+}
+
+@media (min-width: 600px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Botón flotante de compra rápida */
+.quick-add-btn {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: rgba(42, 42, 42, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FCFCFC;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all var(--transition-normal);
+  z-index: 4;
+}
+
+.product-card:hover .quick-add-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quick-add-btn:hover {
+  background-color: var(--accent-color);
+}
+
+.quick-add-btn.added {
+  background-color: #2F6F4E;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.section-cta-wrap {
+  text-align: center;
+  margin-top: 4.5rem;
+}
+
+/* =========================================
+   4. STORYTELLING / LIFESTYLE IN-SITU
+   ========================================= */
+.story-section {
+  padding: 6rem 0;
+  background: linear-gradient(180deg, #F8F7F4 0%, #FCFCFC 100%);
+  border-top: 1px solid var(--border-color);
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .story-grid {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 5.5rem;
+  }
+}
+
+.story-image-box {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-subtle);
+  aspect-ratio: 4 / 5;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-smooth);
+}
+
+.story-image-box:hover .story-image {
+  transform: scale(1.03);
+}
+
+.story-image-tag {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background-color: rgba(252, 252, 252, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.story-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.story-title {
+  font-size: 2.6rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .story-title {
+    font-size: 3.1rem;
+  }
+}
+
+.story-paragraph {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.story-signature {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.signature-quote {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--accent-color);
+  margin-bottom: 0.8rem;
+}
+
+.story-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--transition-fast);
+}
+
+.story-link:hover {
+  color: var(--accent-color);
+}
+
+/* =========================================
+   5. INSTAGRAM SHOWCASE
+   ========================================= */
+.instagram-section {
+  padding: 5rem 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.instagram-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.instagram-title {
+  font-size: 2.2rem;
+  margin-top: 0.4rem;
+}
+
+.instagram-handle-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  transition: color var(--transition-fast);
+}
+
+.instagram-handle-link:hover {
+  color: var(--text-primary);
+}
+
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+@media (min-width: 900px) {
+  .instagram-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.insta-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.insta-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-smooth);
+}
+
+.insta-item:hover img {
+  transform: scale(1.06);
+}
+
+.insta-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(42, 42, 42, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.insta-item:hover .insta-overlay {
+  opacity: 1;
+}
+
+/* =========================================
+   6. NEWSLETTER (EL CÍRCULO ELENVEY)
+   ========================================= */
+.newsletter-section {
+  padding: 4.5rem 0 6rem;
+}
+
+.newsletter-box {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 2rem;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-subtle);
+}
+
+.newsletter-title {
+  font-size: 2.4rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.newsletter-desc {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin: 0 auto 2.2rem;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media (min-width: 560px) {
+  .newsletter-form {
+    flex-direction: row;
+  }
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background-color: #FCFCFC;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.newsletter-input:focus {
+  border-color: var(--accent-color);
+}
+
+.newsletter-note {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
