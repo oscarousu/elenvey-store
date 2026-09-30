@@ -10,12 +10,12 @@ export default function AboutPage() {
   return (
     <main className="about-wrapper" style={{ padding: '3.5rem 0 7rem' }}>
       {/* Hero Editorial */}
-      <section className="container" style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 4.5rem' }}>
+      <section className="container" style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto clamp(2.5rem, 5vw, 4.5rem)' }}>
         <span className="eyebrow-tag" style={{ justifyContent: 'center' }}>FILOSOFÍA & MANIFIESTO</span>
-        <h1 style={{ fontSize: '3.6rem', marginTop: '0.8rem', marginBottom: '1.4rem', lineHeight: '1.15' }}>
+        <h1 style={{ fontSize: 'clamp(2.1rem, 6vw, 3.6rem)', marginTop: '0.8rem', marginBottom: '1.4rem', lineHeight: '1.15' }}>
           El santuario de la paciencia y el trabajo manual.
         </h1>
-        <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', lineHeight: '1.8' }}>
+        <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: 'var(--text-secondary)', lineHeight: '1.8' }}>
           En una época regida por la inmediatez y lo desechable, <strong>Elenvey</strong> nace como una pausa. Un regreso consciente a la calidez de las manos, al silencio del taller y a la pureza del algodón crudo.
         </p>
       </section>
@@ -119,8 +119,8 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Final */}
-      <section className="container" style={{ textAlign: 'center', marginTop: '6rem' }}>
-        <h2 style={{ fontSize: '2.6rem', marginBottom: '1.2rem' }}>¿Listo para vestir tu hogar con calma?</h2>
+      <section className="container" style={{ textAlign: 'center', marginTop: 'clamp(3.5rem, 6vw, 6rem)' }}>
+        <h2 style={{ fontSize: 'clamp(1.9rem, 5.5vw, 2.6rem)', marginBottom: '1.2rem' }}>¿Listo para vestir tu hogar con calma?</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '2.5rem', fontSize: '1.05rem' }}>
           Explora nuestras piezas disponibles o escríbenos para pedidos personalizados.
         </p>

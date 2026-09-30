@@ -41,17 +41,11 @@
 }
 
 .hero-title {
-  font-size: 2.8rem;
+  font-size: clamp(2.15rem, 6.5vw, 3.75rem);
   font-weight: 300;
-  line-height: 1.12;
+  line-height: 1.14;
   letter-spacing: -0.02em;
   color: var(--text-primary);
-}
-
-@media (min-width: 768px) {
-  .hero-title {
-    font-size: 3.75rem;
-  }
 }
 
 .title-italic {
@@ -75,6 +69,23 @@
   margin-top: 0.6rem;
 }
 
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 3rem 0 3.5rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    text-align: center;
+  }
+}
+
 .hero-trust-bar {
   display: flex;
   align-items: center;
@@ -83,6 +94,14 @@
   margin-top: 2rem;
   padding-top: 1.8rem;
   border-top: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 640px) {
+  .hero-trust-bar {
+    gap: 0.85rem 1.25rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+  }
 }
 
 .trust-item {
@@ -344,6 +363,28 @@
   margin-top: 2.2rem;
 }
 
+@media (max-width: 768px) {
+  .category-filters {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.25rem 0.5rem 0.85rem;
+    margin-top: 1.4rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .category-filters::-webkit-scrollbar {
+    display: none;
+  }
+  .category-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.78rem;
+    padding: 0.45rem 1.05rem;
+  }
+}
+
 .category-pill {
   padding: 0.52rem 1.25rem;
   border-radius: var(--radius-full);
@@ -371,6 +412,18 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem 1.8rem;
+}
+
+@media (max-width: 600px) {
+  .product-grid {
+    gap: 2.2rem 1.5rem;
+  }
+  .featured-section {
+    padding: 3.5rem 0 4.5rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 6vw, 2.75rem);
+  }
 }
 
 @media (min-width: 600px) {
@@ -413,6 +466,19 @@
 .product-card:hover .quick-add-btn {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .quick-add-btn {
+    opacity: 0.95;
+    transform: translateY(0);
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.75rem;
+    background-color: rgba(42, 42, 42, 0.9);
+  }
 }
 
 .quick-add-btn:hover {

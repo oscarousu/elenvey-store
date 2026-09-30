@@ -176,6 +176,19 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </section>
         )}
       </div>
+
+      {/* Barra Flotante Adhesiva de Compra para Móviles (Conversion UX) */}
+      <aside className="mobile-sticky-bar" aria-label="Acceso directo de compra rápida">
+        <div className="mobile-sticky-info">
+          <span className="mobile-sticky-title">{product.name}</span>
+          <span className="mobile-sticky-price">
+            ${Number(product.price).toLocaleString('es-CO')} <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>COP</span>
+          </span>
+        </div>
+        <div className="mobile-sticky-cta">
+          <AddToCartButton product={product} />
+        </div>
+      </aside>
     </main>
   );
 }

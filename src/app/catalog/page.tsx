@@ -12,13 +12,13 @@ export default async function CatalogPage() {
   const allProducts = await getSafeDbProducts();
 
   return (
-    <main className="catalog-wrapper" style={{ padding: '3.5rem 0 6rem' }}>
+    <main className="catalog-wrapper" style={{ padding: 'clamp(2rem, 4vw, 3.5rem) 0 clamp(3.5rem, 6vw, 6rem)' }}>
       <div className="container" style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
         <span className="eyebrow-tag" style={{ justifyContent: 'center' }}>TIENDA & ARCHIVO DE PIEZAS</span>
-        <h1 style={{ fontSize: '3.2rem', marginTop: '0.6rem', marginBottom: '1rem' }}>
+        <h1 style={{ fontSize: 'clamp(2.1rem, 5.5vw, 3.2rem)', marginTop: '0.6rem', marginBottom: '1rem', lineHeight: '1.15' }}>
           Colección Completa Elenvey
         </h1>
-        <p style={{ maxWidth: '640px', margin: '0 auto', color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.7' }}>
+        <p style={{ maxWidth: '640px', margin: '0 auto', color: 'var(--text-secondary)', fontSize: 'clamp(0.92rem, 2.5vw, 1.05rem)', lineHeight: '1.7' }}>
           Obras textiles contemporáneas anudadas a mano con paciencia infinita. Disponibles para envío inmediato o elaboradas bajo pedido con medidas personalizadas.
         </p>
       </div>

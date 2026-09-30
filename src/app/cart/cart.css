@@ -95,14 +95,15 @@
 }
 
 .qty-input {
-  width: 52px;
+  width: 54px;
+  min-height: 38px;
   padding: 0.3rem 0.4rem;
   border-radius: var(--radius-xs);
   border: 1px solid var(--border-color);
   background-color: #FFFFFF;
   text-align: center;
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 1rem; /* 16px elimina zoom en iOS */
   outline: none;
 }
 
@@ -111,13 +112,19 @@
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.5rem;
   transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.remove-btn:hover {
+.remove-btn:hover,
+.remove-btn:active {
   color: #C0392B;
 }
 
@@ -185,7 +192,8 @@
   border: 1px solid var(--border-color);
   background-color: #FFFFFF;
   font-family: var(--font-sans);
-  font-size: 0.92rem;
+  font-size: 1rem; /* 16px estricto: erradica auto-zoom en iOS Safari */
+  min-height: 46px;
   color: var(--text-primary);
   outline: none;
   transition: all var(--transition-fast);
@@ -274,4 +282,76 @@
   display: flex;
   align-items: center;
   gap: 0.55rem;
+}
+
+/* =========================================
+   ADAPTACIONES RESPONSIVAS MÓVILES (< 768px)
+   ========================================= */
+@media (max-width: 768px) {
+  .cart-layout {
+    gap: 2rem;
+    margin-top: 1.25rem;
+  }
+
+  .cart-item {
+    padding: 1rem;
+    gap: 0.9rem;
+  }
+
+  .cart-item-image {
+    width: 76px;
+    height: 76px;
+  }
+
+  .cart-item-info h3 {
+    font-size: 1.12rem;
+  }
+
+  .cart-item-price {
+    font-size: 0.9rem;
+  }
+
+  .shipping-form-box {
+    padding: 1.35rem 1.05rem;
+    border-radius: var(--radius-md);
+  }
+
+  .shipping-header {
+    margin-bottom: 1.3rem;
+    padding-bottom: 1rem;
+  }
+
+  .shipping-header h2 {
+    font-size: 1.55rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.05rem;
+  }
+
+  .form-group label {
+    font-size: 0.74rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px !important; /* Garantía absoluta contra auto-zoom iOS Safari */
+    padding: 0.75rem 0.85rem;
+  }
+
+  .cart-summary {
+    padding: 1.35rem 1.1rem;
+    border-radius: var(--radius-md);
+    position: static;
+  }
+
+  .cart-summary h2 {
+    font-size: 1.55rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .summary-total {
+    font-size: 1.25rem;
+  }
 }
