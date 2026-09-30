@@ -67,10 +67,14 @@ export async function POST(req: Request) {
 
           if (items && items.length > 0) {
             for (const item of items) {
-              await supabase.rpc('decrement_product_stock', {
-                p_id: item.product_id,
-                p_qty: item.quantity,
-              }).catch(() => null);
+              try {
+                await supabase.rpc('decrement_product_stock', {
+                  p_id: item.product_id,
+                  p_qty: item.quantity,
+                });
+              } catch {
+                // RPC opcional si aún no está creada la función en Supabase
+              }
             }
           }
         }
