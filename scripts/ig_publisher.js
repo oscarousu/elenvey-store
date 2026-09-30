@@ -327,42 +327,33 @@ async function handleLogin() {
   process.exit(1);
 }
 
-async function publishPost(postId, type = 'card') {
-  const post = POSTS.find(p => p.id === postId);
-  if (!post) {
-    console.error(`❌ Post con ID ${postId} no encontrado en el catálogo.`);
-    process.exit(1);
-  }
-
+async function publishSinglePostWorkflow(page, post, type = 'card') {
   const relativeImagePath = type === 'fullbleed' ? post.fullbleedImage : post.cardImage;
   const imagePath = path.resolve(ROOT_DIR, relativeImagePath);
 
   if (!fs.existsSync(imagePath)) {
     console.error(`❌ La imagen no existe en la ruta: ${imagePath}`);
-    process.exit(1);
+    return false;
   }
 
   console.log(`\n======================================================`);
-  console.log(`📸 PUBLICANDO EN INSTAGRAM: Post ${post.id} - ${post.title}`);
-  console.log(`🖼️ Imagen: ${relativeImagePath}`);
+  console.log(`📸 PUBLICANDO: Post ${post.id.toString().padStart(2, '0')} - ${post.title}`);
+  console.log(`🖼️ Formato: ${type === 'fullbleed' ? 'Full-Bleed 4:5 (Foto Limpia)' : 'Studio Card 4:5 (Galería de Autor)'}`);
   console.log(`======================================================\n`);
 
-  const { context, page } = await launchBrowser();
-
   try {
-    console.log('1️⃣ Navegando a Instagram...');
-    await page.goto('https://www.instagram.com/', { waitUntil: 'networkidle', timeout: 45000 });
-    await page.waitForTimeout(3000);
+    // 0️⃣ Asegurar estado limpio de la página navegando al feed principal
+    await page.goto('https://www.instagram.com/', { waitUntil: 'networkidle', timeout: 35000 });
+    await page.waitForTimeout(2500);
 
-    // Manejar popup de "Ahora no"
     const notNowBtn = await page.$('button:has-text("Ahora no"), button:has-text("Not Now")');
     if (notNowBtn) {
-      await notNowBtn.click();
+      await notNowBtn.click().catch(() => {});
       await page.waitForTimeout(1000);
     }
 
-    // 2️⃣ Localizar el botón de "Crear" / "New post"
-    console.log('2️⃣ Buscando botón "Crear"...');
+    // 1️⃣ Localizar el botón de "Crear" / "New post"
+    console.log('1️⃣ Buscando botón "Crear"...');
     const createSelectors = [
       'svg[aria-label="Crear"]',
       'svg[aria-label="Nueva publicación"]',
@@ -375,7 +366,6 @@ async function publishPost(postId, type = 'card') {
     for (const sel of createSelectors) {
       const el = await page.$(sel);
       if (el) {
-        // Clic en el elemento o su contenedor clickable
         await el.click();
         createFound = true;
         console.log(`   ✓ Clic en botón Crear (${sel})`);
@@ -384,12 +374,21 @@ async function publishPost(postId, type = 'card') {
     }
 
     if (!createFound) {
-      throw new Error('No se encontró el botón "Crear". Verifica que hayas iniciado sesión.');
+      console.log('   ⚠️ Botón Crear no encontrado en primera instancia. Recargando feed...');
+      await page.goto('https://www.instagram.com/', { waitUntil: 'networkidle', timeout: 30000 });
+      await page.waitForTimeout(2000);
+      const fallbackCreate = await page.$('svg[aria-label="Nueva publicación"], svg[aria-label="Crear"], span:text-is("Crear")');
+      if (fallbackCreate) {
+        await fallbackCreate.click();
+        createFound = true;
+      } else {
+        throw new Error('No se pudo encontrar el botón "Crear".');
+      }
     }
 
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1500);
 
-    // Si se abre un submenú con "Publicación" / "Post", hacer clic
+    // Submenú "Publicación" si aparece
     const subMenuPost = await page.$('span:text-is("Publicación"), span:text-is("Post")');
     if (subMenuPost) {
       await subMenuPost.click();
@@ -397,15 +396,15 @@ async function publishPost(postId, type = 'card') {
       await page.waitForTimeout(1500);
     }
 
-    // 3️⃣ Cargar la imagen
-    console.log('3️⃣ Subiendo imagen...');
+    // 2️⃣ Cargar la imagen
+    console.log('2️⃣ Subiendo imagen...');
     const fileInput = await page.waitForSelector('input[type="file"]', { state: 'attached', timeout: 15000 });
     await fileInput.setInputFiles(imagePath);
     console.log('   ✓ Imagen cargada exitosamente.');
     await page.waitForTimeout(3500);
 
-    // 4️⃣ Ajustar relación de aspecto a Original / 4:5
-    console.log('4️⃣ Ajustando relación de aspecto (4:5)...');
+    // 3️⃣ Ajustar relación de aspecto a Original / 4:5
+    console.log('3️⃣ Verificando relación de aspecto (4:5 vertical)...');
     try {
       const cropBtn = await page.$('button:has(svg[aria-label="Seleccionar recorte"]), button:has(svg[aria-label="Select crop"]), svg[aria-label="Seleccionar recorte"], svg[aria-label="Select crop"]');
       if (cropBtn) {
@@ -425,79 +424,142 @@ async function publishPost(postId, type = 'card') {
         }
       }
     } catch (e) {
-      console.log('   ℹ️ Ajuste de recorte omitido o ya predeterminado:', e.message);
+      console.log('   ℹ️ Ajuste de recorte ya óptimo.');
     }
 
-    // 5️⃣ Clic en "Siguiente" (paso de filtros)
-    console.log('5️⃣ Avanzando a edición y filtros...');
+    // 4️⃣ Avanzar paso de filtros
+    console.log('4️⃣ Avanzando a filtros...');
     const nextBtn1 = await page.waitForSelector('div[role="button"]:has-text("Siguiente"), div[role="button"]:has-text("Next"), button:has-text("Siguiente"), button:has-text("Next")', { timeout: 15000 });
     await nextBtn1.click();
-    console.log('   ✓ Primer paso "Siguiente" completado');
+    console.log('   ✓ Filtros validados');
     await page.waitForTimeout(2500);
 
-    // 6️⃣ Clic en "Siguiente" (paso a texto y pie de foto)
-    console.log('6️⃣ Avanzando a pie de foto...');
-    const nextBtn2 = await page.waitForSelector('div[role="button"]:has-text("Siguiente"), div[role="button"]:has-text("Next"), button:has-text("Siguiente"), button:has-text("Next")', { timeout: 15000 });
-    await nextBtn2.click();
-    console.log('   ✓ Segundo paso "Siguiente" completado');
-    await page.waitForTimeout(2500);
+    // 5️⃣ Avanzar a pie de foto (verificando si ya está en la pantalla final de Compartir)
+    console.log('5️⃣ Avanzando a pie de foto...');
+    const shareReadyCheck = (await page.getByRole('button', { name: /^Compartir$|^Share$/i }).count()) > 0;
+    if (!shareReadyCheck) {
+      try {
+        const nextBtn2 = await page.waitForSelector('div[role="button"]:has-text("Siguiente"), div[role="button"]:has-text("Next"), button:has-text("Siguiente"), button:has-text("Next")', { timeout: 5000 });
+        if (nextBtn2) {
+          await nextBtn2.click();
+          console.log('   ✓ Paso de filtros avanzado a pie de foto');
+          await page.waitForTimeout(2500);
+        }
+      } catch (_) {
+        console.log('   ℹ️ Ya se encontraba en la pantalla de pie de foto.');
+      }
+    } else {
+      console.log('   ✓ Ya se encuentra en la pantalla de pie de foto y compartir');
+    }
 
-    // 7️⃣ Escribir el texto / pie de foto (Caption)
-    console.log('7️⃣ Escribiendo pie de foto oficial de Elenvey...');
+    // 6️⃣ Escribir texto / pie de foto (Caption)
+    console.log('6️⃣ Escribiendo pie de foto oficial de Elenvey...');
     const captionEditor = await page.waitForSelector(
       'div[aria-label="Escribe un pie de foto..."], div[aria-label="Write a caption..."], div[contenteditable="true"][role="textbox"]',
       { timeout: 15000 }
     );
     await captionEditor.click();
     await page.waitForTimeout(500);
-
-    // Escribir el caption
     await captionEditor.fill(post.caption);
-    console.log('   ✓ Pie de foto y hashtags insertados correctamente');
+    console.log('   ✓ Copy y hashtags insertados correctamente');
     await page.waitForTimeout(2000);
 
-    // 8️⃣ Clic en "Compartir" / "Share" (Botón superior derecho del diálogo)
-    console.log('8️⃣ Publicando en la cuenta @elenvey_creaciones...');
-    let shareClicked = false;
-
+    // 7️⃣ Clic en "Compartir" (Botón superior derecho del diálogo)
+    console.log('7️⃣ Publicando en la cuenta @elenvey_creaciones...');
     const exactShare = page.getByRole('button', { name: /^Compartir$|^Share$/i });
     if (await exactShare.count() > 0) {
       await exactShare.first().click({ force: true });
-      shareClicked = true;
       console.log('   ✓ Clic en "Compartir" realizado exitosamente (exact match)');
     } else {
-      const headerShare = page.locator('div[role="dialog"] div[role="button"]:text-is("Compartir"), div[role="dialog"] button:text-is("Compartir"), div[role="dialog"] div[role="button"]:text-is("Share"), div[role="dialog"] button:text-is("Share")');
+      const headerShare = page.locator('div[role="dialog"] div[role="button"]:text-is("Compartir"), div[role="dialog"] button:text-is("Compartir")');
       await headerShare.first().click({ force: true });
-      shareClicked = true;
       console.log('   ✓ Clic en "Compartir" realizado exitosamente (header dialog)');
     }
 
-    // 9️⃣ Esperar confirmación
-    console.log('9️⃣ Esperando confirmación de Instagram...');
+    // 8️⃣ Esperar confirmación
+    console.log('8️⃣ Esperando confirmación de Instagram...');
     const successSelector = 'span:has-text("Se ha compartido tu publicación"), span:has-text("Your post has been shared"), img[alt*="Animación que indica que la publicación se ha compartido"], svg[aria-label="Animación que indica que la publicación se ha compartido"]';
 
     try {
       await page.waitForSelector(successSelector, { timeout: 60000 });
-      console.log('\n🎉🎉🎉 ¡PUBLICACIÓN EXITOSA EN INSTAGRAM! 🎉🎉🎉');
-      console.log(`El Post ${post.id} ya se encuentra publicado en el feed.`);
+      console.log(`🎉 ¡POST ${post.id.toString().padStart(2, '0')} PUBLICADO CON ÉXITO!`);
     } catch (e) {
       console.log('⚠️ Esperando 10s extra para asegurar la subida en segundo plano...');
       await page.waitForTimeout(10000);
-      const screenshotPath = path.resolve(ROOT_DIR, `public/images/debug_post_${post.id}.png`);
-      await page.screenshot({ path: screenshotPath });
-      console.log(`📸 Captura de pantalla de verificación guardada en: ${screenshotPath}`);
     }
 
-    await page.waitForTimeout(5000);
+    // 9️⃣ Cerrar la modal haciendo clic en "Listo" para el siguiente post
+    const listoBtn = page.getByRole('button', { name: /^Listo$|^Done$/i });
+    if (await listoBtn.count() > 0) {
+      await listoBtn.first().click({ force: true }).catch(() => {});
+      console.log('   ✓ Modal cerrada con "Listo"');
+    } else {
+      await page.keyboard.press('Escape');
+    }
+    await page.waitForTimeout(2000);
+    return true;
   } catch (error) {
-    console.error('\n❌ ERROR DURANTE LA PUBLICACIÓN:', error.message);
-    const errScreenshot = path.resolve(ROOT_DIR, `public/images/debug_error_post_${postId}.png`);
+    console.error(`❌ Error publicando Post ${post.id}:`, error.message);
+    const errScreenshot = path.resolve(ROOT_DIR, `public/images/debug_error_post_${post.id}.png`);
     await page.screenshot({ path: errScreenshot }).catch(() => {});
-    console.log(`📸 Captura de pantalla del error guardada en: ${errScreenshot}`);
+    return false;
+  }
+}
+
+async function publishBatch(targets, type = 'card') {
+  let targetIds = [];
+  if (Array.isArray(targets)) {
+    targetIds = targets;
+  } else if (typeof targets === 'object' && targets.start && targets.end) {
+    for (let id = targets.start; id <= targets.end; id++) targetIds.push(id);
+  } else {
+    for (let id = 2; id <= 13; id++) targetIds.push(id);
+  }
+
+  const postsToPublish = POSTS.filter(p => targetIds.includes(p.id));
+
+  console.log(`\n======================================================`);
+  console.log(`🚀 INICIANDO PUBLICACIÓN SECUENCIAL AUTOMATIZADA`);
+  console.log(`📦 Posts a publicar: ${postsToPublish.length} (${postsToPublish.map(p => `Post ${p.id}`).join(', ')})`);
+  console.log(`📐 Formato: ${type === 'fullbleed' ? 'Full-Bleed 4:5' : 'Studio Card 4:5 (Elenvey Luxury Passe-partout)'}`);
+  console.log(`⏱️ Intervalo de seguridad entre posts: 25 segundos`);
+  console.log(`======================================================\n`);
+
+  const { context, page } = await launchBrowser();
+
+  try {
+    let successCount = 0;
+    for (let i = 0; i < postsToPublish.length; i++) {
+      const post = postsToPublish[i];
+      console.log(`\n------------------------------------------------------`);
+      console.log(`📊 [${i + 1}/${postsToPublish.length}] Procesando Post ${post.id}: ${post.title}`);
+      console.log(`------------------------------------------------------`);
+
+      const success = await publishSinglePostWorkflow(page, post, type);
+      if (success) {
+        successCount++;
+      }
+
+      if (i < postsToPublish.length - 1) {
+        console.log(`\n⏳ Pausa segura de 25 segundos antes del siguiente post (anti-spam Meta)...`);
+        await page.waitForTimeout(25000);
+      }
+    }
+
+    console.log(`\n======================================================`);
+    console.log(`🎉 PROCESO FINALIZADO EXITOSAMENTE`);
+    console.log(`✅ Posts publicados: ${successCount} de ${postsToPublish.length}`);
+    console.log(`======================================================\n`);
+  } catch (err) {
+    console.error('Error general durante la ejecución en lote:', err.message);
   } finally {
     console.log('Cerrando sesión del navegador...');
     await context.close();
   }
+}
+
+async function publishPost(postId, type = 'card') {
+  await publishBatch([postId], type);
 }
 
 // Control de argumentos CLI
@@ -514,6 +576,22 @@ if (args.includes('--login')) {
     console.log(`  - Fullbleed: ${p.fullbleedImage}`);
   });
   console.log(`======================================================\n`);
+} else if (args.includes('--ids')) {
+  const idsIdx = args.indexOf('--ids');
+  const idsStr = args[idsIdx + 1] || '';
+  const parsedIds = idsStr.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n));
+  const type = args.includes('--fullbleed') ? 'fullbleed' : 'card';
+  publishBatch(parsedIds, type);
+} else if (args.includes('--all')) {
+  const type = args.includes('--fullbleed') ? 'fullbleed' : 'card';
+  publishBatch({ start: 2, end: 13 }, type);
+} else if (args.includes('--from') && args.includes('--to')) {
+  const fromIdx = args.indexOf('--from');
+  const toIdx = args.indexOf('--to');
+  const startId = parseInt(args[fromIdx + 1], 10) || 2;
+  const endId = parseInt(args[toIdx + 1], 10) || 13;
+  const type = args.includes('--fullbleed') ? 'fullbleed' : 'card';
+  publishBatch({ start: startId, end: endId }, type);
 } else if (args.includes('--post')) {
   const postIndex = args.indexOf('--post');
   const postId = parseInt(args[postIndex + 1], 10) || 1;
@@ -525,8 +603,11 @@ if (args.includes('--login')) {
 Uso:
   node scripts/ig_publisher.js --login              Inicia Google Chrome para guardar tu sesión
   node scripts/ig_publisher.js --list               Muestra todos los posts disponibles en el catálogo
-  node scripts/ig_publisher.js --post <id>          Publica el Post indicado (diseño Studio Card 4:5)
-  node scripts/ig_publisher.js --post <id> --fullbleed Publica la foto limpia a sangre (Full-Bleed 4:5)
+  node scripts/ig_publisher.js --ids 3,5,7,9        Publica la lista específica de IDs
+  node scripts/ig_publisher.js --all                Publica todos los posts del catálogo (2 al 13)
+  node scripts/ig_publisher.js --from 2 --to 5      Publica un rango específico de posts
+  node scripts/ig_publisher.js --post <id>          Publica el Post individual indicado
+  --fullbleed                                       Bandera opcional para usar foto a sangre limpia
 `);
 }
 
