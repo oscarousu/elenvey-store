@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <!-- Fondo Warm Alabaster -->
+  <rect width="1080" height="1080" fill="#F6F5F2" />
+
+  <!-- Anillo concéntrico sutil -->
+  <circle cx="540" cy="540" r="455" stroke="#EAE6DF" stroke-width="2.5" fill="none" />
+  <circle cx="540" cy="540" r="445" stroke="#F0ECE5" stroke-width="1.5" fill="none" />
+
+  <!-- Isotipo de gran presencia visual -->
+  <g transform="translate(540, 535)">
+    <g transform="translate(-360, -240) scale(3.0)">
+      <path d="M 30,95 C 50,95 65,92 78,85 C 92,76 108,52 132,42 C 152,34 172,42 166,66 C 158,96 116,132 86,132 C 60,132 46,112 56,92 C 66,72 98,64 126,74 C 154,84 174,106 186,104 C 196,102 202,88 195,78 C 188,68 174,72 176,86 C 178,98 194,104 206,94 C 214,86 216,72 210,64" 
+            stroke="#2A2A2A" 
+            stroke-width="3.8" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            fill="none" />
+    </g>
+  </g>
+</svg>

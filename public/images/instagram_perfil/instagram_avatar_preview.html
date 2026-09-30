@@ -1,0 +1,244 @@
+
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+          body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA;
+            padding: 40px;
+            color: #262626;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          h1 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #111;
+          }
+          p.subtitle {
+            font-size: 14px;
+            color: #737373;
+            margin-bottom: 36px;
+            text-align: center;
+            max-width: 600px;
+          }
+          .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 36px;
+            max-width: 1000px;
+            width: 100%;
+          }
+          .card {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+          }
+          .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+          }
+          .card-badge {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+          }
+          .badge-rec {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+          }
+          .badge-alt {
+            background-color: #F5F5F5;
+            color: #616161;
+          }
+          .preview-container {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 20px;
+          }
+          /* Aro de Historia de Instagram */
+          .story-ring {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+            padding: 3.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .avatar-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3.5px solid #FFFFFF;
+            overflow: hidden;
+            background: #FFFFFF;
+          }
+          .avatar-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          /* Miniatura en feed / comentarios (44px) */
+          .feed-mini {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+          }
+          .feed-mini-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid #E5E5E5;
+          }
+          .feed-mini-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          .mini-label {
+            font-size: 11px;
+            color: #8E8E8E;
+          }
+          .card-desc {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.5;
+            text-align: center;
+            margin-top: 10px;
+            max-width: 380px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Simulador Oficial de Foto de Perfil — @elenvey_creaciones</h1>
+        <p class="subtitle">Demostración exacta de cómo se verá cada propuesta dentro del recorte circular nativo de Instagram y con el aro de Historias activo.</p>
+        
+        <div class="grid">
+          
+            <div class="card">
+              <span class="card-title">Imagotipo Editorial Warm Linen</span>
+              <span class="card-badge badge-rec">★ Recomendada Oficial</span>
+              
+              <div class="preview-container">
+                <div class="story-ring">
+                  <div class="avatar-circle">
+                    <img src="avatar_01_imagotipo_linen.png" alt="Imagotipo Editorial Warm Linen">
+                  </div>
+                </div>
+                <div class="feed-mini">
+                  <div class="feed-mini-circle">
+                    <img src="avatar_01_imagotipo_linen.png" alt="Imagotipo Editorial Warm Linen">
+                  </div>
+                  <span class="mini-label">En comentarios (44px)</span>
+                </div>
+              </div>
+
+              <p class="card-desc">
+                Equilibrio maestro entre el isotipo fluido y el nombre ELENVEY. 100% legible, transmite calidez, artesanía textil y minimalismo japonés-boho.
+                
+                
+                
+              </p>
+            </div>
+          
+            <div class="card">
+              <span class="card-title">Isotipo Puro Monograma Minimalista</span>
+              <span class="card-badge badge-alt">Variante Curada</span>
+              
+              <div class="preview-container">
+                <div class="story-ring">
+                  <div class="avatar-circle">
+                    <img src="avatar_02_isotype_pure.png" alt="Isotipo Puro Monograma Minimalista">
+                  </div>
+                </div>
+                <div class="feed-mini">
+                  <div class="feed-mini-circle">
+                    <img src="avatar_02_isotype_pure.png" alt="Isotipo Puro Monograma Minimalista">
+                  </div>
+                  <span class="mini-label">En comentarios (44px)</span>
+                </div>
+              </div>
+
+              <p class="card-desc">
+                
+                Máxima síntesis visual. El nudo continuo de la letra E resalta con absoluta fuerza incluso en pantallas diminutas y aros de historias.
+                
+                
+              </p>
+            </div>
+          
+            <div class="card">
+              <span class="card-title">Edición Nocturna Dark Charcoal</span>
+              <span class="card-badge badge-alt">Variante Curada</span>
+              
+              <div class="preview-container">
+                <div class="story-ring">
+                  <div class="avatar-circle">
+                    <img src="avatar_03_dark_charcoal.png" alt="Edición Nocturna Dark Charcoal">
+                  </div>
+                </div>
+                <div class="feed-mini">
+                  <div class="feed-mini-circle">
+                    <img src="avatar_03_dark_charcoal.png" alt="Edición Nocturna Dark Charcoal">
+                  </div>
+                  <span class="mini-label">En comentarios (44px)</span>
+                </div>
+              </div>
+
+              <p class="card-desc">
+                
+                
+                Edición de alto contraste sobre fondo Dark Charcoal (#242424). Crea un impacto premium inmediato sobre el feed blanco de Instagram.
+                
+              </p>
+            </div>
+          
+            <div class="card">
+              <span class="card-title">Sello Atelier Circular de Lujo</span>
+              <span class="card-badge badge-alt">Variante Curada</span>
+              
+              <div class="preview-container">
+                <div class="story-ring">
+                  <div class="avatar-circle">
+                    <img src="avatar_04_atelier_seal.png" alt="Sello Atelier Circular de Lujo">
+                  </div>
+                </div>
+                <div class="feed-mini">
+                  <div class="feed-mini-circle">
+                    <img src="avatar_04_atelier_seal.png" alt="Sello Atelier Circular de Lujo">
+                  </div>
+                  <span class="mini-label">En comentarios (44px)</span>
+                </div>
+              </div>
+
+              <p class="card-desc">
+                
+                
+                
+                Sello clásico circular con texto perimetral. Ideal para posicionar la marca con un aura de taller artesanal de alta gama (Atelier).
+              </p>
+            </div>
+          
+        </div>
+      </body>
+    </html>
+  

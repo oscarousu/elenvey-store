@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap');
+      .pure-wordmark {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 110px;
+        font-weight: 500;
+        letter-spacing: 0.32em;
+        fill: #2A2A2A;
+        text-anchor: middle;
+      }
+      .pure-tag {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: 0.38em;
+        fill: #8C7661;
+        text-anchor: middle;
+        text-transform: uppercase;
+      }
+    </style>
+  </defs>
+
+  <!-- Fondo Lienzo Cálido -->
+  <rect width="1080" height="1080" fill="#FCFCFC" />
+
+  <!-- Anillo sutil -->
+  <circle cx="540" cy="540" r="455" stroke="#EAE6DF" stroke-width="2" fill="none" />
+
+  <text x="560" y="525" class="pure-wordmark">ELENVEY</text>
+  <text x="540" y="585" class="pure-tag">COLOMBIA</text>
+</svg>
