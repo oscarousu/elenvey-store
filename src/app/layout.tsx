@@ -11,10 +11,54 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Elenvey | Arte Textil, Macramé Minimalista & Piezas de Autor",
-  description: "Santuario digital de artesanía textil contemporánea, macramé minimalista y accesorios creados a mano con fibras naturales en Colombia.",
+  metadataBase: new URL("https://elenvey-store.vercel.app"),
+  title: {
+    default: "Elenvey · Anudado con el Alma | Macramé & Arte Textil Contemporáneo",
+    template: "%s | Elenvey",
+  },
+  description: "Santuario de arte textil contemporáneo, macramé minimalista y piezas únicas de autor elaboradas a mano con fibras 100% naturales en Colombia. Envíos a todo el país.",
+  keywords: [
+    "macramé colombia",
+    "arte textil contemporáneo",
+    "decoración japandi",
+    "tapices de pared artesanales",
+    "macramé minimalista",
+    "elenvey",
+    "anudado con el alma",
+    "hecho a mano colombia",
+    "comprar macrame medellin bogota"
+  ],
+  authors: [{ name: "Elenvey" }],
+  creator: "Elenvey",
+  publisher: "Elenvey",
+  alternates: {
+    canonical: "https://elenvey-store.vercel.app",
+  },
+  openGraph: {
+    title: "Elenvey · Anudado con el Alma | Macramé & Arte Textil",
+    description: "Artesanía textil contemporánea, macramé minimalista y piezas únicas de autor en fibras naturales. Envíos a toda Colombia y compras 100% seguras.",
+    url: "https://elenvey-store.vercel.app",
+    siteName: "Elenvey",
+    locale: "es_CO",
+    type: "website",
+    images: [
+      {
+        url: "/images/og-elenvey.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Elenvey · Anudado con el Alma - Macramé Minimalista en Colombia",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Elenvey · Anudado con el Alma",
+    description: "Artesanía textil contemporánea y macramé minimalista hecho a mano en Colombia.",
+    images: ["/images/og-elenvey.jpg"],
+  },
   icons: {
     icon: "/logo/elenvey-isotype.svg",
+    apple: "/logo/elenvey-isotype.svg",
   },
 };
 
