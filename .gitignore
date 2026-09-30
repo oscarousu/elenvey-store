@@ -43,3 +43,6 @@ next-env.d.ts
 # scratch
 scratch/
 
+# instagram session data & debug
+.instagram_session/
+public/images/debug*
