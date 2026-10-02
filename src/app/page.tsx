@@ -47,11 +47,11 @@ export default async function Home() {
               </div>
               <div className="trust-item">
                 <span className="trust-dot"></span>
-                <span>Piezas únicas y bajo pedido</span>
+                <span>Elaborado bajo pedido · Slow Craft</span>
               </div>
               <div className="trust-item">
                 <span className="trust-dot"></span>
-                <span>Envíos a todo el país</span>
+                <span>Envíos asegurados a todo el país</span>
               </div>
             </div>
           </div>
@@ -120,9 +120,9 @@ export default async function Home() {
 
             <div className="pillar-card">
               <span className="pillar-num">02</span>
-              <h3 className="pillar-title">Paciencia Manual</h3>
+              <h3 className="pillar-title">Creación Bajo Pedido</h3>
               <p className="pillar-desc">
-                Rechazamos la prisa de la producción masiva. Cada tapiz o pulsera requiere horas o días de anudado manual punto por punto.
+                Cero sobreproducción masiva. Tu obra es anudada a mano por nuestra madre artesana únicamente tras tu compra, asegurando una creación fresca concebida con el alma para tu hogar.
               </p>
             </div>
 

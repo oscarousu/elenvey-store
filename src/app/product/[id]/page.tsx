@@ -80,13 +80,37 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               <p>{product.description}</p>
             </div>
 
-            {/* Estado de Disponibilidad */}
+            {/* Estado de Disponibilidad & Slow Craft Made-to-Order */}
             <div className="product-availability">
               <div className="avail-indicator">
                 <span className="avail-dot"></span>
                 <span className="avail-text">
-                  {product.is_unique ? 'Pieza única de autor · Disponible de inmediato' : 'Disponible en stock limitado'}
+                  {product.is_unique 
+                    ? 'Pieza única de autor · Confeccionada y lista para despacho' 
+                    : 'Pieza de autor · Elaborada bajo pedido exclusivamente para ti'}
                 </span>
+              </div>
+            </div>
+
+            {/* Tarjeta Informativa de Creación Consciente */}
+            <div className="craft-timeline-card">
+              <div className="timeline-header">
+                <span className="timeline-icon">⏳</span>
+                <div>
+                  <strong className="timeline-title">Creación consciente por nuestra maestra artesana</strong>
+                  <p className="timeline-desc">
+                    {product.is_unique 
+                      ? 'Esta obra ya fue tejida a mano con devoción. Se alista y empaca para despacho en 24-48 horas hábiles.' 
+                      : 'Cada nudo se realiza pacientemente a mano tras tu compra. Tiempo de confección: 3 a 5 días hábiles antes del despacho nacional.'}
+                  </p>
+                </div>
+              </div>
+              <div className="timeline-perk-badge">
+                <span>🌿 100% Hecho a Mano</span>
+                <span className="badge-sep">·</span>
+                <span>Cero sobreproducción</span>
+                <span className="badge-sep">·</span>
+                <span>Seguimiento por WhatsApp</span>
               </div>
             </div>
 
@@ -96,21 +120,27 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             {/* Puntos Clave de Confianza (SKILL.md) */}
             <div className="product-perks">
               <div className="perk-row">
+                <span className="perk-icon">🧶</span>
+                <div>
+                  <strong>Hecho Bajo Pedido:</strong> Tu pieza no duerme en una bodega; nace exclusivamente para ti, cuidando cada detalle y la frescura de sus fibras.
+                </div>
+              </div>
+              <div className="perk-row">
                 <span className="perk-icon">📦</span>
                 <div>
-                  <strong>Envíos a toda Colombia:</strong> Despacho cuidadoso con número de seguimiento.
+                  <strong>Envíos a toda Colombia:</strong> Despacho cuidadoso con número de seguimiento y seguro activo.
                 </div>
               </div>
               <div className="perk-row">
                 <span className="perk-icon">💳</span>
                 <div>
-                  <strong>Pago 100% Seguro:</strong> Procesado con cifrado bancario vía MercadoPago.
+                  <strong>Pago 100% Seguro:</strong> Procesado con cifrado bancario vía MercadoPago (Tarjetas, PSE, Nequi).
                 </div>
               </div>
               <div className="perk-row">
                 <span className="perk-icon">✨</span>
                 <div>
-                  <strong>Garantía Artesanal:</strong> Reemplazo o ajuste si tu pieza presenta algún defecto en su tejido.
+                  <strong>Garantía Artesanal:</strong> Respaldamos la calidad de cada nudo y tejido de por vida.
                 </div>
               </div>
             </div>
@@ -125,7 +155,19 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 <div className="accordion-content">
                   <p>• <strong>Materia prima:</strong> Hilo de algodón crudo peinado 100% biodegradable.</p>
                   <p>• <strong>Soporte:</strong> Madera natural pulida o aro metálico según diseño.</p>
-                  <p>• <strong>Técnica:</strong> Nudos planos, festón y alondra ejecutados a mano.</p>
+                  <p>• <strong>Técnica:</strong> Nudos planos, festón y alondra ejecutados a mano por nuestra artesana.</p>
+                </div>
+              </details>
+
+              <details className="accordion-item">
+                <summary className="accordion-header">
+                  <span>Proceso de Creación & Despacho</span>
+                  <span className="accordion-arrow">↓</span>
+                </summary>
+                <div className="accordion-content">
+                  <p>• <strong>Tiempo de tejido:</strong> 3 a 5 días hábiles de anudado manual minucioso.</p>
+                  <p>• <strong>Envíos nacionales:</strong> 2 a 4 días hábiles mediante Servientrega o Interrapidísimo.</p>
+                  <p>• <strong>Acompañamiento personal:</strong> Te notificamos por WhatsApp cuando comencemos a tejer tu pieza y al momento de enviarla con foto previa.</p>
                 </div>
               </details>
 

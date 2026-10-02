@@ -60,11 +60,28 @@ export default function AboutPage() {
             Nuestra Historia
           </h2>
           <p>
-            Elenvey germinó en Colombia a partir de una profunda fascinación por el arte textil tradicional: la capacidad infinita de una simple hebra para transformarse, a través de nudos precisos, en una escultura viva cargada de serenidad.
+            Elenvey germinó en Colombia a partir de una profunda devoción por el arte textil tradicional: la capacidad infinita de una simple hebra de algodón para transformarse, a través de nudos pacientes, en una escultura viva cargada de serenidad y calidez.
           </p>
           <p>
-            Cada obra que ves en este catálogo no responde a tendencias pasajeras de temporada. Nos inspiramos en los paisajes de nuestra tierra, en las texturas de la tierra húmeda, los tonos de la arcilla cocida y el lino crudo. Creemos que una pieza artesanal no debe competir con tu espacio; debe armonizar con él, trayendo calma y actuando como un bálsamo visual.
+            Detrás de cada pieza no hay una fábrica anónima ni cadenas de montaje industrial. Hay un solo par de manos: las de nuestra madre tejedora. En la intimidad de su taller en Colombia, cada obra es anudada con concentración absoluta, calibrando la tensión de cada cuerda y honrando la nobleza de las fibras naturales.
           </p>
+
+          <div style={{ 
+            backgroundColor: '#FAF8F5', 
+            border: '1px solid #ECE7DF', 
+            borderLeft: '4px solid var(--accent-color)', 
+            padding: '2rem 2.2rem', 
+            borderRadius: 'var(--radius-sm)',
+            margin: '0.8rem 0'
+          }}>
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.65rem', color: 'var(--text-primary)', marginBottom: '0.8rem' }}>
+              El Arte de Crear Bajo Pedido (Slow Craft)
+            </h3>
+            <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: '1.75', margin: 0 }}>
+              Creemos firmemente en el consumo consciente y el respeto por los recursos naturales. Por eso, no almacenamos inventarios masivos en bodegas frías. Cada tapiz, atrapasueños o accesorio cobra vida <strong>únicamente cuando tú decides llevarlo a tu hogar</strong>. Dedicamos entre 3 y 5 días hábiles a confeccionar tu pieza exclusivamente para ti, garantizando que recibas una obra fresca, cuidada en cada nudo y elaborada con dedicación maternal.
+            </p>
+          </div>
+
           <blockquote style={{ 
             borderLeft: '2px solid var(--accent-color)', 
             paddingLeft: '1.8rem', 
@@ -77,7 +94,7 @@ export default function AboutPage() {
             “No buscamos la perfección geométrica de una máquina; buscamos la gracia sutil de la mano humana que respira en cada puntada.”
           </blockquote>
           <p>
-            Al elegir una pieza de Elenvey, no solo adquieres un objeto de decoración o una joya textil; respaldas el diseño independiente, los materiales biodegradables y el derecho a habitar hogares más tranquilos.
+            Al elegir una pieza de Elenvey, no solo adquieres una joya textil para vestir tu hogar; respaldas la artesanía familiar colombiana, la preservación de técnicas manuales y el compromiso de habitar espacios colmados de sosiego.
           </p>
         </div>
       </section>

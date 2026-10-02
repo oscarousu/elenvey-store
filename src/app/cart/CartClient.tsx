@@ -320,7 +320,19 @@ export default function CartClient() {
           <span>${getTotal().toLocaleString('es-CO')} COP</span>
         </div>
 
-        <div style={{ marginTop: '1.5rem' }}>
+        {/* Aviso de Creación Consciente Bajo Pedido */}
+        <div className="cart-craft-notice">
+          <div className="notice-icon">⏳</div>
+          <div className="notice-content">
+            <strong className="notice-title">Piezas tejidas bajo pedido</strong>
+            <p className="notice-text">
+              Nuestra maestra artesana iniciará el anudado tras confirmar tu compra. 
+              Tiempo estimado de tejido: <strong>3 a 5 días hábiles</strong>. Te contactaremos vía WhatsApp con fotos del proceso y guía de envío.
+            </p>
+          </div>
+        </div>
+
+        <div style={{ marginTop: '1.2rem' }}>
           <button 
             type="submit"
             form="checkout-form"

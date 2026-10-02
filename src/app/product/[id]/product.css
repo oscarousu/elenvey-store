@@ -159,6 +159,60 @@
   background-color: #2F6F4E;
 }
 
+/* Tarjeta Informativa de Creación Consciente / Made to Order */
+.craft-timeline-card {
+  margin-top: 0.95rem;
+  margin-bottom: 1.5rem;
+  padding: 1.15rem 1.35rem;
+  background-color: #FAF8F5;
+  border: 1px solid #ECE7DF;
+  border-left: 3px solid var(--accent-color);
+  border-radius: var(--radius-sm);
+}
+
+.timeline-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.timeline-icon {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.timeline-title {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.timeline-perk-badge {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed #E2DDD5;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--accent-sage-dark);
+}
+
+.timeline-perk-badge .badge-sep {
+  color: #C8C0B5;
+}
+
 /* Perks */
 .product-perks {
   display: flex;
